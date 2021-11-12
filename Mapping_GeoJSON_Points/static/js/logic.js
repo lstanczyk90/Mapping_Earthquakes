@@ -5,30 +5,30 @@ console.log("working");
 // mapid references the html DIV id for our map object.
 // Set view contains the center coordinates, and 4 is the level of zoom.
 let map = L.map('mapid', {
-    center: [37.5, -122.5], 
-    zoom: 10
+    center: [30, 30], 
+    zoom: 2
     });
 
-// Add GeoJSON data.
-//GeoJSON data coordinates are set with the first parameter as X (longitude) and the second parameter as Y (latitude)
-let sanFranAirport =
-{"type":"FeatureCollection","features":[{
-    "type":"Feature",
-    "properties":{
-        "id":"3469",
-        "name":"San Francisco International Airport",
-        "city":"San Francisco",
-        "country":"United States",
-        "faa":"SFO",
-        "icao":"KSFO",
-        "alt":"13",
-        "tz-offset":"-8",
-        "dst":"A",
-        "tz":"America/Los_Angeles"},
-        "geometry":{
-            "type":"Point",
-            "coordinates":[-122.375,37.61899948120117]}}
-]};
+// // Add GeoJSON data.
+// //GeoJSON data coordinates are set with the first parameter as X (longitude) and the second parameter as Y (latitude)
+// let sanFranAirport =
+// {"type":"FeatureCollection","features":[{
+//     "type":"Feature",
+//     "properties":{
+//         "id":"3469",
+//         "name":"San Francisco International Airport",
+//         "city":"San Francisco",
+//         "country":"United States",
+//         "faa":"SFO",
+//         "icao":"KSFO",
+//         "alt":"13",
+//         "tz-offset":"-8",
+//         "dst":"A",
+//         "tz":"America/Los_Angeles"},
+//         "geometry":{
+//             "type":"Point",
+//             "coordinates":[-122.375,37.61899948120117]}}
+// ]};
 
 // // Grabbing our GeoJSON data.
 // // GeoJSON objects are added to the map through a GeoJSON layer.
@@ -42,15 +42,19 @@ let sanFranAirport =
 
 //   }).addTo(map);
 
-// When we use the onEachFeature callback function we can add a popup marker for each feature 
-// and add data from the properties of the JavaScript object
-// This method allows many JS methjods that can be accessed and used, including the geometry and properties of our JSON (unlike the pointToLater function)
-L.geoJson(sanFranAirport, {
-    onEachFeature: function(feature, layer) {
-        console.log(layer);
-        layer.bindPopup("<h2>" + feature.properties.name + "</h2> <hr> <h3>" + feature.properties.city + ", " + feature.properties.country + "</h3>");
-    }
-}).addTo(map)
+// // When we use the onEachFeature callback function we can add a popup marker for each feature 
+// // and add data from the properties of the JavaScript object
+// // This method allows many JS methjods that can be accessed and used, including the geometry and properties of our JSON (unlike the pointToLater function)
+// L.geoJson(sanFranAirport, {
+//     onEachFeature: function(feature, layer) {
+//         console.log(layer);
+//         layer.bindPopup("<h2>" + feature.properties.name + "</h2> <hr> <h3>" + feature.properties.city + ", " + feature.properties.country + "</h3>");
+//     }
+// }).addTo(map)
+
+// Accessing the airport GeoJSON URL
+let airportData = "https://raw.githubusercontent.com/<GitHub_name>/Mapping_Earthquakes/main/majorAirports.json";
+
 
 // We create the tile layer that will be the background of our map.
 let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
